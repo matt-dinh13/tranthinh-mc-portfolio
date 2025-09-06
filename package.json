@@ -2,8 +2,9 @@
   "name": "tranthinh-mc-portfolio",
   "version": "0.1.0",
   "private": true,
+  "description": "Bilingual MC Portfolio - Static Website",
   "scripts": {
-    "build": "echo 'Static site - no build needed'",
-    "start": "echo 'Static site ready'"
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000"
   }
 }
