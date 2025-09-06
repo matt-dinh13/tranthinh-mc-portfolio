@@ -47,6 +47,67 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        /* Hero Background Image - 16:9 Crop with PNG (Keep bottom, cut top) */
+        .hero-bg {
+            background-image: url('470212774_9597167646966676_228368322971564766_n.jpg');
+            background-size: cover;
+            background-position: center bottom; /* Keep bottom, crop from top */
+            background-repeat: no-repeat;
+            /* Force 16:9 aspect ratio */
+            aspect-ratio: 16/9;
+            min-height: 100vh; /* Ensure full height on mobile */
+        }
+        /* Mobile-specific improvements */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.1 !important;
+            }
+            .hero-subtitle {
+                font-size: 1.5rem !important;
+                line-height: 1.2 !important;
+            }
+            .hero-description {
+                font-size: 1rem !important;
+                padding: 0 1rem !important;
+            }
+            .cta-button {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 1rem !important;
+                width: 100% !important;
+                max-width: 280px !important;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 1rem !important;
+            }
+            .stats-number {
+                font-size: 1.5rem !important;
+            }
+            .stats-label {
+                font-size: 0.75rem !important;
+            }
+            /* Mobile: Use full height instead of 16:9 */
+            .hero-bg {
+                aspect-ratio: unset;
+                min-height: 100vh;
+            }
+        }
+        /* Desktop: 16:9 aspect ratio */
+        @media (min-width: 1024px) {
+            .hero-bg {
+                aspect-ratio: 16/9;
+                min-height: 100vh;
+            }
+        }
+        /* Hero overlay for better text readability */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%);
+        }
+        /* Spotlight effect */
+        .spotlight {
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 30%, transparent 70%);
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -56,26 +117,26 @@
             <div class="flex items-center justify-between h-16 lg:h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <button onclick="scrollToSection('home')" class="text-2xl font-bold gradient-warm hover:opacity-80 transition-all duration-300">
+                    <button onclick="scrollToSection('home')" class="text-xl sm:text-2xl font-bold text-white hover:text-amber-300 transition-all duration-300 drop-shadow-lg">
                         Trần Thịnh
                     </button>
                 </div>
 
                 <!-- Desktop Navigation -->
                 <nav class="hidden lg:flex items-center space-x-8">
-                    <button onclick="scrollToSection('home')" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200">Trang chủ</button>
-                    <button onclick="scrollToSection('about')" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200">Giới thiệu</button>
-                    <button onclick="scrollToSection('services')" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200">Dịch vụ</button>
-                    <button onclick="scrollToSection('portfolio')" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200">Portfolio</button>
-                    <button onclick="scrollToSection('testimonials')" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200">Đánh giá</button>
-                    <button onclick="scrollToSection('contact')" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200">Liên hệ</button>
+                    <button onclick="scrollToSection('home')" class="nav-link text-white/90 hover:text-amber-300 font-medium transition-colors duration-200">Trang chủ</button>
+                    <button onclick="scrollToSection('about')" class="nav-link text-white/90 hover:text-amber-300 font-medium transition-colors duration-200">Giới thiệu</button>
+                    <button onclick="scrollToSection('services')" class="nav-link text-white/90 hover:text-amber-300 font-medium transition-colors duration-200">Dịch vụ</button>
+                    <button onclick="scrollToSection('portfolio')" class="nav-link text-white/90 hover:text-amber-300 font-medium transition-colors duration-200">Portfolio</button>
+                    <button onclick="scrollToSection('testimonials')" class="nav-link text-white/90 hover:text-amber-300 font-medium transition-colors duration-200">Đánh giá</button>
+                    <button onclick="scrollToSection('contact')" class="nav-link text-white/90 hover:text-amber-300 font-medium transition-colors duration-200">Liên hệ</button>
                 </nav>
 
                 <!-- Desktop Actions -->
                 <div class="hidden lg:flex items-center space-x-4">
                     <!-- Language Switcher -->
                     <div class="relative">
-                        <button id="languageBtn" onclick="toggleLanguage()" class="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 hover:from-amber-100 hover:to-orange-100 transition-all duration-300 text-amber-800 font-medium">
+                        <button id="languageBtn" onclick="toggleLanguage()" class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 text-white font-medium">
                             <i data-lucide="globe" class="w-4 h-4"></i>
                             <span id="currentLangFlag">🇻🇳</span>
                             <span id="currentLangName">Tiếng Việt</span>
@@ -83,11 +144,11 @@
                         </button>
                     </div>
                     
-                    <a href="tel:+84123456789" class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full hover:from-amber-600 hover:to-orange-600 transition-all duration-300 font-medium">
+                    <a href="tel:+84123456789" class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full hover:from-amber-600 hover:to-orange-600 transition-all duration-300 font-medium shadow-lg">
                         <i data-lucide="phone" class="w-4 h-4"></i>
                         <span class="text-sm">Gọi ngay</span>
                     </a>
-                    <a href="mailto:hello@tranthinh.com" class="flex items-center gap-2 px-4 py-2 border border-amber-300 text-amber-700 rounded-full hover:bg-amber-50 transition-all duration-300 font-medium">
+                    <a href="mailto:hello@tranthinh.com" class="flex items-center gap-2 px-4 py-2 border border-white/30 text-white rounded-full hover:bg-white/10 transition-all duration-300 font-medium">
                         <i data-lucide="mail" class="w-4 h-4"></i>
                         <span class="text-sm">Email</span>
                     </a>
@@ -95,33 +156,33 @@
 
                 <!-- Mobile menu button -->
                 <div class="lg:hidden flex items-center space-x-2">
-                    <button id="languageBtnMobile" onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-2 rounded-full bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-amber-800 font-medium text-sm">
-                        <span id="currentLangFlagMobile">🇻��</span>
+                    <button id="languageBtnMobile" onclick="toggleLanguage()" class="flex items-center gap-1 px-2 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium text-xs">
+                        <span id="currentLangFlagMobile">🇻🇳</span>
                         <span id="currentLangNameMobile">VI</span>
                     </button>
-                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-gray-700 hover:bg-amber-50 transition-colors duration-200">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-white hover:bg-white/10 transition-colors duration-200">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Mobile Navigation -->
-            <div id="mobileMenu" class="lg:hidden py-4 border-t border-amber-100 hidden">
-                <nav class="flex flex-col space-y-4">
-                    <button onclick="scrollToSection('home')" class="text-left text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors duration-200">Trang chủ</button>
-                    <button onclick="scrollToSection('about')" class="text-left text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors duration-200">Giới thiệu</button>
-                    <button onclick="scrollToSection('services')" class="text-left text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors duration-200">Dịch vụ</button>
-                    <button onclick="scrollToSection('portfolio')" class="text-left text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors duration-200">Portfolio</button>
-                    <button onclick="scrollToSection('testimonials')" class="text-left text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors duration-200">Đánh giá</button>
-                    <button onclick="scrollToSection('contact')" class="text-left text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors duration-200">Liên hệ</button>
+            <div id="mobileMenu" class="lg:hidden py-4 border-t border-white/20 hidden">
+                <nav class="flex flex-col space-y-3">
+                    <button onclick="scrollToSection('home')" class="text-left text-white/90 hover:text-amber-300 font-medium py-2 transition-colors duration-200">Trang chủ</button>
+                    <button onclick="scrollToSection('about')" class="text-left text-white/90 hover:text-amber-300 font-medium py-2 transition-colors duration-200">Giới thiệu</button>
+                    <button onclick="scrollToSection('services')" class="text-left text-white/90 hover:text-amber-300 font-medium py-2 transition-colors duration-200">Dịch vụ</button>
+                    <button onclick="scrollToSection('portfolio')" class="text-left text-white/90 hover:text-amber-300 font-medium py-2 transition-colors duration-200">Portfolio</button>
+                    <button onclick="scrollToSection('testimonials')" class="text-left text-white/90 hover:text-amber-300 font-medium py-2 transition-colors duration-200">Đánh giá</button>
+                    <button onclick="scrollToSection('contact')" class="text-left text-white/90 hover:text-amber-300 font-medium py-2 transition-colors duration-200">Liên hệ</button>
                     
                     <!-- Mobile Contact Actions -->
-                    <div class="pt-4 space-y-3">
-                        <a href="tel:+84123456789" class="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-300 font-medium">
+                    <div class="pt-4 space-y-2">
+                        <a href="tel:+84123456789" class="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-300 font-medium">
                             <i data-lucide="phone" class="w-4 h-4"></i>
                             <span>Gọi ngay</span>
                         </a>
-                        <a href="mailto:hello@tranthinh.com" class="flex items-center gap-2 px-4 py-3 border border-amber-300 text-amber-700 rounded-lg hover:bg-amber-50 transition-all duration-300 font-medium">
+                        <a href="mailto:hello@tranthinh.com" class="flex items-center justify-center gap-2 px-4 py-3 border border-white/30 text-white rounded-lg hover:bg-white/10 transition-all duration-300 font-medium">
                             <i data-lucide="mail" class="w-4 h-4"></i>
                             <span>Email</span>
                         </a>
@@ -131,282 +192,378 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
-        <!-- Background Pattern -->
+    <!-- Hero Section with 16:9 Cropped Professional MC Image -->
+    <section id="home" class="relative flex items-center justify-center overflow-hidden hero-bg">
+        <!-- Dark Overlay for better text readability -->
+        <div class="absolute inset-0 hero-overlay"></div>
+        
+        <!-- Spotlight Effect -->
+        <div class="absolute inset-0 spotlight"></div>
+        
+        <!-- Professional Stage Elements -->
         <div class="absolute inset-0">
-            <div class="absolute top-20 right-20 w-32 h-32 border border-amber-200/30 rounded-full"></div>
-            <div class="absolute bottom-32 left-20 w-16 h-16 border border-orange-200/30 rounded-full"></div>
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-red-200/20 rounded-full"></div>
-            <div class="absolute top-1/4 right-1/4 w-8 h-8 bg-gradient-to-r from-amber-300 to-orange-300 rounded-full opacity-20"></div>
-            <div class="absolute bottom-1/4 left-1/4 w-12 h-12 bg-gradient-to-r from-orange-300 to-red-300 rounded-full opacity-20"></div>
+            <!-- Stage lighting effects -->
+            <div class="absolute top-20 right-20 w-32 h-32 border border-amber-300/20 rounded-full hidden sm:block"></div>
+            <div class="absolute bottom-32 left-20 w-16 h-16 border border-orange-300/20 rounded-full hidden sm:block"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-red-300/10 rounded-full hidden lg:block"></div>
         </div>
 
         <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="space-y-8">
-                <!-- Badge -->
-                <div class="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 backdrop-blur-sm border border-amber-200/50">
-                    <i data-lucide="star" class="w-5 h-5 text-amber-600 mr-2"></i>
-                    <span id="heroBadge" class="text-amber-800 font-medium text-sm">Người dẫn chương trình chuyên nghiệp</span>
+            <div class="space-y-6 sm:space-y-8">
+                <!-- Professional Badge -->
+                <div class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+                    <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 mr-2"></i>
+                    <span id="heroBadge" class="text-white font-medium text-xs sm:text-sm">Người dẫn chương trình chuyên nghiệp</span>
                 </div>
 
-                <!-- Main Title -->
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-light text-gray-900 leading-tight">
+                <!-- Main Title with Professional Styling -->
+                <h1 class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-tight drop-shadow-2xl">
                     <span class="block" id="heroTitle">Trần Thịnh</span>
-                    <span class="block font-bold gradient-warm" id="heroSubtitle">Cho đám cưới, sự kiện doanh nghiệp & nhiều hơn nữa</span>
+                    <span class="block font-bold text-amber-300 hero-subtitle text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl drop-shadow-lg" id="heroSubtitle">Cho đám cưới, sự kiện doanh nghiệp & nhiều hơn nữa</span>
                 </h1>
 
-                <!-- Dynamic Event Type -->
-                <div class="h-16 flex items-center justify-center">
-                    <h2 id="dynamicEventType" class="text-2xl md:text-3xl lg:text-4xl font-light text-amber-700">Đám cưới</h2>
+                <!-- Dynamic Event Type with Spotlight Effect -->
+                <div class="h-12 sm:h-16 flex items-center justify-center">
+                    <h2 id="dynamicEventType" class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light text-amber-200 drop-shadow-lg">Đám cưới</h2>
                 </div>
 
-                <!-- Description -->
-                <p id="heroDescription" class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                <!-- Professional Description -->
+                <p id="heroDescription" class="hero-description text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed px-4 drop-shadow-lg">
                     MC song ngữ chuyên tạo ra những khoảnh khắc khó quên cho đám cưới, sự kiện doanh nghiệp và lễ hội văn hóa trên khắp Việt Nam.
                 </p>
 
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-                    <button onclick="scrollToSection('about')" class="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium text-lg rounded-full hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+                <!-- Professional CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-6 sm:pt-8 px-4">
+                    <button onclick="scrollToSection('about')" class="cta-button px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium text-base sm:text-lg rounded-full hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105">
                         <span id="bookNowBtn">Đặt ngay</span>
                     </button>
-                    <button onclick="scrollToSection('portfolio')" class="px-8 py-4 border-2 border-amber-300 text-amber-700 font-medium text-lg rounded-full hover:bg-amber-50 transition-all duration-300">
+                    <button onclick="scrollToSection('portfolio')" class="cta-button px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/50 text-white font-medium text-base sm:text-lg rounded-full hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
                         <span id="viewPortfolioBtn">Xem Portfolio</span>
                     </button>
                 </div>
 
-                <!-- Stats -->
-                <div class="grid grid-cols-3 gap-8 pt-16 max-w-lg mx-auto">
-                    <div class="text-center">
-                        <div class="text-3xl md:text-4xl font-bold text-amber-600 mb-2">500+</div>
-                        <div class="text-gray-600 text-sm font-medium" id="statsEvents">Sự kiện</div>
+                <!-- Professional Stats -->
+                <div class="stats-grid grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-12 sm:pt-16 max-w-lg mx-auto px-4">
+                    <div class="text-center p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                        <div class="stats-number text-2xl sm:text-3xl md:text-4xl font-bold text-amber-300 mb-1 sm:mb-2 drop-shadow-lg">500+</div>
+                        <div class="text-white/80 text-xs sm:text-sm font-medium stats-label" id="statsEvents">Sự kiện</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl md:text-4xl font-bold text-orange-600 mb-2">2</div>
-                        <div class="text-gray-600 text-sm font-medium" id="statsLanguages">Ngôn ngữ</div>
+                    <div class="text-center p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                        <div class="stats-number text-2xl sm:text-3xl md:text-4xl font-bold text-orange-300 mb-1 sm:mb-2 drop-shadow-lg">2</div>
+                        <div class="text-white/80 text-xs sm:text-sm font-medium stats-label" id="statsLanguages">Ngôn ngữ</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl md:text-4xl font-bold text-red-600 mb-2">10+</div>
-                        <div class="text-gray-600 text-sm font-medium" id="statsYears">Năm kinh nghiệm</div>
+                    <div class="text-center p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                        <div class="stats-number text-2xl sm:text-3xl md:text-4xl font-bold text-red-300 mb-1 sm:mb-2 drop-shadow-lg">10+</div>
+                        <div class="text-white/80 text-xs sm:text-sm font-medium stats-label" id="statsYears">Năm kinh nghiệm</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-            <button onclick="scrollToSection('about')" class="flex flex-col items-center text-amber-600 hover:text-amber-700 transition-colors duration-300">
+        <!-- Professional Scroll Indicator -->
+        <div class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2">
+            <button onclick="scrollToSection('about')" class="flex flex-col items-center text-white/80 hover:text-amber-300 transition-colors duration-300">
                 <span id="scrollText" class="text-xs mb-2 font-medium">Cuộn xuống</span>
-                <i data-lucide="arrow-down" class="w-5 h-5 animate-bounce"></i>
+                <i data-lucide="arrow-down" class="w-4 h-4 sm:w-5 sm:h-5 animate-bounce"></i>
             </button>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white/50 backdrop-blur-sm">
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-amber-50 to-orange-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                    <span id="aboutTitle">Gặp gỡ</span> <span class="gradient-warm" id="aboutSubtitle">Trần Thịnh</span>
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    <span id="portfolioTitle">Portfolio</span> <span class="gradient-warm" id="portfolioSubtitle">Sự kiện nổi bật</span>
                 </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
+                <p class="text-lg text-gray-600 mt-6 max-w-3xl mx-auto" id="portfolioDescription">
+                    Khám phá những sự kiện đáng nhớ mà tôi đã dẫn dắt, từ đám cưới sang trọng đến sự kiện doanh nghiệp quy mô lớn.
+                </p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
+            <!-- Featured Event Showcase -->
+            <div class="mb-16 sm:mb-20">
+                <div class="relative group overflow-hidden rounded-2xl shadow-2xl">
+                    <img src="514336376_24709423658647828_5825376893972904723_n.jpg" 
+                         alt="Trần Thịnh - Live MC Performance" 
+                         class="w-full h-64 sm:h-80 lg:h-96 object-cover transform group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center">
+                                <i data-lucide="mic" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white" id="featuredEventTitle">Sự kiện nổi bật</h3>
+                                <p class="text-amber-200 text-sm sm:text-base" id="featuredEventSubtitle">MC chuyên nghiệp trong hành động</p>
+                            </div>
+                        </div>
+                        <p class="text-white/90 text-sm sm:text-base leading-relaxed max-w-2xl" id="featuredEventDescription">
+                            Tôi đang dẫn dắt một sự kiện lớn với sự tự tin và chuyên nghiệp, tạo ra những khoảnh khắc đáng nhớ cho khán giả.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Categories -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Wedding Events -->
+                <div class="group bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-pink-100 to-rose-100 flex items-center justify-center">
+                        <div class="text-6xl">💒</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3" id="weddingTitle">Đám cưới</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4" id="weddingDesc">
+                            Tạo ra những khoảnh khắc lãng mạn và đáng nhớ cho ngày cưới của bạn với sự dẫn dắt chuyên nghiệp.
+                        </p>
+                        <div class="flex items-center text-amber-600 font-medium text-sm">
+                            <span id="weddingCount">150+ sự kiện</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corporate Events -->
+                <div class="group bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+                        <div class="text-6xl">🏢</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3" id="corporateTitle">Sự kiện doanh nghiệp</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4" id="corporateDesc">
+                            Dẫn dắt hội nghị, lễ kỷ niệm và sự kiện doanh nghiệp với sự chuyên nghiệp và uy tín.
+                        </p>
+                        <div class="flex items-center text-amber-600 font-medium text-sm">
+                            <span id="corporateCount">200+ sự kiện</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cultural Events -->
+                <div class="group bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
+                        <div class="text-6xl">🎭</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3" id="culturalTitle2">Lễ hội văn hóa</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4" id="culturalDesc2">
+                            Tôn vinh truyền thống văn hóa Việt Nam qua các lễ hội và sự kiện văn hóa đặc sắc.
+                        </p>
+                        <div class="flex items-center text-amber-600 font-medium text-sm">
+                            <span id="culturalCount">150+ sự kiện</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-12 sm:mt-16">
+                <button onclick="scrollToSection(contact)" class="px-8 sm:px-12 py-4 sm:py-5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg sm:text-xl rounded-full hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105">
+                    <span id="portfolioCTA">Đặt lịch tư vấn miễn phí</span>
+                </button>
+            </div>
+        </div>
+    </section>
+<!-- About Section -->
+    <section id="about" class="py-12 sm:py-16 lg:py-20 bg-white/50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    <span id="aboutTitle">Gặp gỡ</span> <span class="gradient-warm" id="aboutSubtitle">Trần Thịnh</span>
+                </h2>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mb-16 sm:mb-20">
+                <!-- Professional Portrait Image -->
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <img src="544551698_25240610335529155_2693480459734645200_n.jpg" 
+                             alt="Trần Thịnh - Professional MC Portrait" 
+                             class="w-full h-96 sm:h-[500px] object-cover rounded-2xl shadow-2xl transform group-hover:scale-105 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-4">
+                                <p class="text-sm text-gray-700 font-medium italic" id="portraitQuote">
+                                    "Mỗi sự kiện đều kể một câu chuyện, và vai trò của tôi là đảm bảo câu chuyện đó được mở ra một cách đẹp đẽ."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Content -->
-                <div class="space-y-6">
-                    <p id="aboutDesc1" class="text-lg text-gray-700 leading-relaxed">
+                <div class="order-1 lg:order-2 space-y-4 sm:space-y-6">
+                    <p id="aboutDesc1" class="text-base sm:text-lg text-gray-700 leading-relaxed">
                         Với hơn một thập kỷ kinh nghiệm làm Người dẫn chương trình, tôi chuyên tạo ra những khoảnh khắc khó quên cho đám cưới, sự kiện doanh nghiệp và lễ hội văn hóa trên khắp Việt Nam.
                     </p>
-                    <p id="aboutDesc2" class="text-lg text-gray-700 leading-relaxed">
+                    <p id="aboutDesc2" class="text-base sm:text-lg text-gray-700 leading-relaxed">
                         Sinh ra và lớn lên tại Huế, tôi hiểu rõ di sản văn hóa phong phú của Việt Nam đồng thời thông thạo cả tiếng Việt và tiếng Anh. Sự kết hợp độc đáo này cho phép tôi phục vụ các cặp đôi quốc tế, khách hàng doanh nghiệp và gia đình địa phương với chuyên môn ngang nhau.
                     </p>
-                    <p id="aboutDesc3" class="text-lg text-gray-700 leading-relaxed">
+                    <p id="aboutDesc3" class="text-base sm:text-lg text-gray-700 leading-relaxed">
                         Phương pháp của tôi là cá nhân, chuyên nghiệp và đam mê. Tôi tin rằng mỗi sự kiện đều kể một câu chuyện, và vai trò của tôi là đảm bảo câu chuyện đó được mở ra một cách đẹp đẽ, tạo ra những kỷ niệm tồn tại suốt đời.
                     </p>
                 </div>
+            </div>
 
-                <!-- Stats -->
-                <div class="grid grid-cols-2 gap-8">
-                    <div class="text-center p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-100">
-                        <i data-lucide="users" class="w-8 h-8 text-amber-600 mx-auto mb-4"></i>
-                        <div class="text-3xl font-bold text-amber-600 mb-2">500+</div>
-                        <div class="text-sm text-gray-600 font-medium" id="statsEventsHosted">Sự kiện đã tổ chức</div>
-                    </div>
-                    <div class="text-center p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-100">
-                        <i data-lucide="globe" class="w-8 h-8 text-orange-600 mx-auto mb-4"></i>
-                        <div class="text-3xl font-bold text-orange-600 mb-2">2</div>
-                        <div class="text-sm text-gray-600 font-medium" id="statsLanguages2">Ngôn ngữ</div>
-                    </div>
-                    <div class="text-center p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-100">
-                        <i data-lucide="calendar" class="w-8 h-8 text-red-600 mx-auto mb-4"></i>
-                        <div class="text-3xl font-bold text-red-600 mb-2">10+</div>
-                        <div class="text-sm text-gray-600 font-medium" id="statsYearsExp">Năm kinh nghiệm</div>
-                    </div>
-                    <div class="text-center p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-100">
-                        <i data-lucide="heart" class="w-8 h-8 text-pink-600 mx-auto mb-4"></i>
-                        <div class="text-3xl font-bold text-pink-600 mb-2">100%</div>
-                        <div class="text-sm text-gray-600 font-medium" id="statsSatisfaction">Hài lòng khách hàng</div>
-                    </div>
+            <!-- Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16 sm:mb-20">
+                <div class="text-center p-4 sm:p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl sm:rounded-2xl border border-amber-100">
+                    <i data-lucide="users" class="w-6 h-6 sm:w-8 sm:h-8 text-amber-600 mx-auto mb-3 sm:mb-4"></i>
+                    <div class="text-2xl sm:text-3xl font-bold text-amber-600 mb-1 sm:mb-2">500+</div>
+                    <div class="text-xs sm:text-sm text-gray-600 font-medium" id="statsEventsHosted">Sự kiện đã tổ chức</div>
+                </div>
+                <div class="text-center p-4 sm:p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl sm:rounded-2xl border border-amber-100">
+                    <i data-lucide="globe" class="w-6 h-6 sm:w-8 sm:h-8 text-orange-600 mx-auto mb-3 sm:mb-4"></i>
+                    <div class="text-2xl sm:text-3xl font-bold text-orange-600 mb-1 sm:mb-2">2</div>
+                    <div class="text-xs sm:text-sm text-gray-600 font-medium" id="statsLanguages2">Ngôn ngữ</div>
+                </div>
+                <div class="text-center p-4 sm:p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl sm:rounded-2xl border border-amber-100">
+                    <i data-lucide="calendar" class="w-6 h-6 sm:w-8 sm:h-8 text-red-600 mx-auto mb-3 sm:mb-4"></i>
+                    <div class="text-2xl sm:text-3xl font-bold text-red-600 mb-1 sm:mb-2">10+</div>
+                    <div class="text-xs sm:text-sm text-gray-600 font-medium" id="statsYearsExp">Năm kinh nghiệm</div>
+                </div>
+                <div class="text-center p-4 sm:p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl sm:rounded-2xl border border-amber-100">
+                    <i data-lucide="heart" class="w-6 h-6 sm:w-8 sm:h-8 text-pink-600 mx-auto mb-3 sm:mb-4"></i>
+                    <div class="text-2xl sm:text-3xl font-bold text-pink-600 mb-1 sm:mb-2">100%</div>
+                    <div class="text-xs sm:text-sm text-gray-600 font-medium" id="statsSatisfaction">Hài lòng khách hàng</div>
                 </div>
             </div>
 
             <!-- Specializations -->
-            <div class="text-center mb-12">
-                <h3 class="text-3xl font-bold text-gray-900 mb-4" id="specializationsTitle">Điều gì làm tôi đặc biệt</h3>
-                <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
+            <div class="text-center mb-8 sm:mb-12">
+                <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4" id="specializationsTitle">Điều gì làm tôi đặc biệt</h3>
+                <div class="w-12 sm:w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center p-8 bg-white rounded-2xl shadow-lg border border-amber-100 hover:shadow-xl transition-all duration-300">
-                    <div class="text-4xl mb-4">🌐</div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-4" id="bilingualTitle">Thành thạo song ngữ</h4>
-                    <p class="text-gray-600 leading-relaxed" id="bilingualDesc">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="text-center p-6 sm:p-8 bg-white rounded-xl sm:rounded-2xl shadow-lg border border-amber-100 hover:shadow-xl transition-all duration-300">
+                    <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">🌐</div>
+                    <h4 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4" id="bilingualTitle">Thành thạo song ngữ</h4>
+                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed" id="bilingualDesc">
                         Chuyển đổi liền mạch giữa tiếng Việt và tiếng Anh để đảm bảo mọi khách mời đều cảm thấy được bao gồm và hiểu rõ.
                     </p>
-                    <div class="w-full h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-6"></div>
+                    <div class="w-full h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-4 sm:mt-6"></div>
                 </div>
-                <div class="text-center p-8 bg-white rounded-2xl shadow-lg border border-amber-100 hover:shadow-xl transition-all duration-300">
-                    <div class="text-4xl mb-4">🏮</div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-4" id="culturalTitle">Nhạy cảm văn hóa</h4>
-                    <p class="text-gray-600 leading-relaxed" id="culturalDesc">
+                <div class="text-center p-6 sm:p-8 bg-white rounded-xl sm:rounded-2xl shadow-lg border border-amber-100 hover:shadow-xl transition-all duration-300">
+                    <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">🏮</div>
+                    <h4 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4" id="culturalTitle">Nhạy cảm văn hóa</h4>
+                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed" id="culturalDesc">
                         Hiểu biết sâu sắc về truyền thống Việt Nam và phong tục quốc tế cho những lễ kỷ niệm chân thực.
                     </p>
-                    <div class="w-full h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mt-6"></div>
+                    <div class="w-full h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mt-4 sm:mt-6"></div>
                 </div>
-                <div class="text-center p-8 bg-white rounded-2xl shadow-lg border border-amber-100 hover:shadow-xl transition-all duration-300">
-                    <div class="text-4xl mb-4">💝</div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-4" id="personalTitle">Cá nhân hóa</h4>
-                    <p class="text-gray-600 leading-relaxed" id="personalDesc">
+                <div class="text-center p-6 sm:p-8 bg-white rounded-xl sm:rounded-2xl shadow-lg border border-amber-100 hover:shadow-xl transition-all duration-300 sm:col-span-2 lg:col-span-1">
+                    <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">💝</div>
+                    <h4 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4" id="personalTitle">Cá nhân hóa</h4>
+                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed" id="personalDesc">
                         Mỗi sự kiện đều độc đáo. Tôi dành thời gian để hiểu tầm nhìn của bạn và biến nó thành hiện thực với niềm đam mê và sự chính xác.
                     </p>
-                    <div class="w-full h-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-full mt-6"></div>
+                    <div class="w-full h-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-full mt-4 sm:mt-6"></div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-amber-50 to-orange-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    <span id="portfolioTitle">Portfolio</span> <span class="gradient-warm" id="portfolioSubtitle">Sự kiện nổi bật</span>
+                </h2>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
+                <p class="text-lg text-gray-600 mt-6 max-w-3xl mx-auto" id="portfolioDescription">
+                    Khám phá những sự kiện đáng nhớ mà tôi đã dẫn dắt, từ đám cưới sang trọng đến sự kiện doanh nghiệp quy mô lớn.
+                </p>
+            </div>
 
-    <script>
-        // Language data
-        const translations = {
-            vi: {
-                nav: { home: "Trang chủ", about: "Giới thiệu", services: "Dịch vụ", portfolio: "Portfolio", testimonials: "Đánh giá", contact: "Liên hệ" },
-                hero: { badge: "Người dẫn chương trình chuyên nghiệp", title: "Trần Thịnh", subtitle: "Cho đám cưới, sự kiện doanh nghiệp & nhiều hơn nữa", description: "MC song ngữ chuyên tạo ra những khoảnh khắc khó quên cho đám cưới, sự kiện doanh nghiệp và lễ hội văn hóa trên khắp Việt Nam.", bookNow: "Đặt ngay", viewPortfolio: "Xem Portfolio", stats: { events: "Sự kiện", languages: "Ngôn ngữ", years: "Năm kinh nghiệm" } },
-                about: { title: "Gặp gỡ", subtitle: "Trần Thịnh", description1: "Với hơn một thập kỷ kinh nghiệm làm Người dẫn chương trình, tôi chuyên tạo ra những khoảnh khắc khó quên cho đám cưới, sự kiện doanh nghiệp và lễ hội văn hóa trên khắp Việt Nam.", description2: "Sinh ra và lớn lên tại Huế, tôi hiểu rõ di sản văn hóa phong phú của Việt Nam đồng thời thông thạo cả tiếng Việt và tiếng Anh. Sự kết hợp độc đáo này cho phép tôi phục vụ các cặp đôi quốc tế, khách hàng doanh nghiệp và gia đình địa phương với chuyên môn ngang nhau.", description3: "Phương pháp của tôi là cá nhân, chuyên nghiệp và đam mê. Tôi tin rằng mỗi sự kiện đều kể một câu chuyện, và vai trò của tôi là đảm bảo câu chuyện đó được mở ra một cách đẹp đẽ, tạo ra những kỷ niệm tồn tại suốt đời.", stats: { eventsHosted: "Sự kiện đã tổ chức", languages: "Ngôn ngữ", yearsExperience: "Năm kinh nghiệm", clientSatisfaction: "Hài lòng khách hàng" }, specializations: { title: "Điều gì làm tôi đặc biệt", bilingual: { title: "Thành thạo song ngữ", description: "Chuyển đổi liền mạch giữa tiếng Việt và tiếng Anh để đảm bảo mọi khách mời đều cảm thấy được bao gồm và hiểu rõ." }, cultural: { title: "Nhạy cảm văn hóa", description: "Hiểu biết sâu sắc về truyền thống Việt Nam và phong tục quốc tế cho những lễ kỷ niệm chân thực." }, personal: { title: "Cá nhân hóa", description: "Mỗi sự kiện đều độc đáo. Tôi dành thời gian để hiểu tầm nhìn của bạn và biến nó thành hiện thực với niềm đam mê và sự chính xác." } } }
-            },
-            en: {
-                nav: { home: "Home", about: "About", services: "Services", portfolio: "Portfolio", testimonials: "Testimonials", contact: "Contact" },
-                hero: { badge: "Master of Ceremonies", title: "Tran Thinh", subtitle: "For Weddings, Corporate Events & More", description: "Bilingual MC specializing in creating unforgettable moments for weddings, corporate events, and cultural celebrations across Vietnam.", bookNow: "Book Now", viewPortfolio: "View Portfolio", stats: { events: "Events", languages: "Languages", years: "Years" } },
-                about: { title: "Meet", subtitle: "Tran Thinh", description1: "With over a decade of experience as a Master of Ceremonies, I specialize in creating unforgettable moments for weddings, corporate events, and cultural celebrations across Vietnam.", description2: "Born and raised in Hue, I understand the rich cultural heritage of Vietnam while being fluent in both Vietnamese and English. This unique combination allows me to serve international couples, corporate clients, and local families with equal expertise.", description3: "My approach is personal, professional, and passionate. I believe every event tells a story, and my role is to ensure that story unfolds beautifully, creating memories that last a lifetime.", stats: { eventsHosted: "Events Hosted", languages: "Languages", yearsExperience: "Years Experience", clientSatisfaction: "Client Satisfaction" }, specializations: { title: "What Makes Me Special", bilingual: { title: "Bilingual Excellence", description: "Seamlessly switching between Vietnamese and English to ensure every guest feels included and understood." }, cultural: { title: "Cultural Sensitivity", description: "Deep understanding of Vietnamese traditions and international customs for authentic celebrations." }, personal: { title: "Personal Touch", description: "Every event is unique. I take time to understand your vision and bring it to life with passion and precision." } } }
-            }
-        };
+            <!-- Featured Event Showcase -->
+            <div class="mb-16 sm:mb-20">
+                <div class="relative group overflow-hidden rounded-2xl shadow-2xl">
+                    <img src="514336376_24709423658647828_5825376893972904723_n.jpg" 
+                         alt="Trần Thịnh - Live MC Performance" 
+                         class="w-full h-64 sm:h-80 lg:h-96 object-cover transform group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center">
+                                <i data-lucide="mic" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white" id="featuredEventTitle">Sự kiện nổi bật</h3>
+                                <p class="text-amber-200 text-sm sm:text-base" id="featuredEventSubtitle">MC chuyên nghiệp trong hành động</p>
+                            </div>
+                        </div>
+                        <p class="text-white/90 text-sm sm:text-base leading-relaxed max-w-2xl" id="featuredEventDescription">
+                            Tôi đang dẫn dắt một sự kiện lớn với sự tự tin và chuyên nghiệp, tạo ra những khoảnh khắc đáng nhớ cho khán giả.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-        let currentLanguage = 'vi';
-        let currentEventType = 0;
-        const eventTypes = {
-            vi: ['Đám cưới', 'Sự kiện doanh nghiệp', 'Buổi hòa nhạc', 'Lễ hội văn hóa'],
-            en: ['Weddings', 'Corporate Events', 'Concerts', 'Cultural Festivals']
-        };
+            <!-- Event Categories -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Wedding Events -->
+                <div class="group bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-pink-100 to-rose-100 flex items-center justify-center">
+                        <div class="text-6xl">💒</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3" id="weddingTitle">Đám cưới</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4" id="weddingDesc">
+                            Tạo ra những khoảnh khắc lãng mạn và đáng nhớ cho ngày cưới của bạn với sự dẫn dắt chuyên nghiệp.
+                        </p>
+                        <div class="flex items-center text-amber-600 font-medium text-sm">
+                            <span id="weddingCount">150+ sự kiện</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </div>
+                    </div>
+                </div>
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            lucide.createIcons();
-            updateLanguage();
-            startEventTypeRotation();
-            setupScrollEffects();
-        });
+                <!-- Corporate Events -->
+                <div class="group bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+                        <div class="text-6xl">🏢</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3" id="corporateTitle">Sự kiện doanh nghiệp</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4" id="corporateDesc">
+                            Dẫn dắt hội nghị, lễ kỷ niệm và sự kiện doanh nghiệp với sự chuyên nghiệp và uy tín.
+                        </p>
+                        <div class="flex items-center text-amber-600 font-medium text-sm">
+                            <span id="corporateCount">200+ sự kiện</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </div>
+                    </div>
+                </div>
 
-        function toggleLanguage() {
-            currentLanguage = currentLanguage === 'vi' ? 'en' : 'vi';
-            updateLanguage();
-        }
+                <!-- Cultural Events -->
+                <div class="group bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
+                        <div class="text-6xl">🎭</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3" id="culturalTitle2">Lễ hội văn hóa</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4" id="culturalDesc2">
+                            Tôn vinh truyền thống văn hóa Việt Nam qua các lễ hội và sự kiện văn hóa đặc sắc.
+                        </p>
+                        <div class="flex items-center text-amber-600 font-medium text-sm">
+                            <span id="culturalCount">150+ sự kiện</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        function updateLanguage() {
-            const t = translations[currentLanguage];
-            
-            // Update navigation
-            document.querySelectorAll('.nav-link').forEach((link, index) => {
-                const keys = ['home', 'about', 'services', 'portfolio', 'testimonials', 'contact'];
-                link.textContent = t.nav[keys[index]];
-            });
-
-            // Update hero section
-            document.getElementById('heroBadge').textContent = t.hero.badge;
-            document.getElementById('heroTitle').textContent = t.hero.title;
-            document.getElementById('heroSubtitle').textContent = t.hero.subtitle;
-            document.getElementById('heroDescription').textContent = t.hero.description;
-            document.getElementById('bookNowBtn').textContent = t.hero.bookNow;
-            document.getElementById('viewPortfolioBtn').textContent = t.hero.viewPortfolio;
-            document.getElementById('statsEvents').textContent = t.hero.stats.events;
-            document.getElementById('statsLanguages').textContent = t.hero.stats.languages;
-            document.getElementById('statsYears').textContent = t.hero.stats.years;
-            document.getElementById('scrollText').textContent = currentLanguage === 'vi' ? 'Cuộn xuống' : 'Scroll';
-
-            // Update about section
-            document.getElementById('aboutTitle').textContent = t.about.title;
-            document.getElementById('aboutSubtitle').textContent = t.about.subtitle;
-            document.getElementById('aboutDesc1').textContent = t.about.description1;
-            document.getElementById('aboutDesc2').textContent = t.about.description2;
-            document.getElementById('aboutDesc3').textContent = t.about.description3;
-            document.getElementById('statsEventsHosted').textContent = t.about.stats.eventsHosted;
-            document.getElementById('statsLanguages2').textContent = t.about.stats.languages;
-            document.getElementById('statsYearsExp').textContent = t.about.stats.yearsExperience;
-            document.getElementById('statsSatisfaction').textContent = t.about.stats.clientSatisfaction;
-            document.getElementById('specializationsTitle').textContent = t.about.specializations.title;
-            document.getElementById('bilingualTitle').textContent = t.about.specializations.bilingual.title;
-            document.getElementById('bilingualDesc').textContent = t.about.specializations.bilingual.description;
-            document.getElementById('culturalTitle').textContent = t.about.specializations.cultural.title;
-            document.getElementById('culturalDesc').textContent = t.about.specializations.cultural.description;
-            document.getElementById('personalTitle').textContent = t.about.specializations.personal.title;
-            document.getElementById('personalDesc').textContent = t.about.specializations.personal.description;
-
-            // Update language switcher
-            document.getElementById('currentLangFlag').textContent = currentLanguage === 'vi' ? '🇻🇳' : '🇺🇸';
-            document.getElementById('currentLangName').textContent = currentLanguage === 'vi' ? 'Tiếng Việt' : 'English';
-            document.getElementById('currentLangFlagMobile').textContent = currentLanguage === 'vi' ? '🇻🇳' : '🇺🇸';
-            document.getElementById('currentLangNameMobile').textContent = currentLanguage === 'vi' ? 'VI' : 'EN';
-
-            // Update dynamic event type
-            updateEventType();
-        }
-
-        function startEventTypeRotation() {
-            setInterval(() => {
-                currentEventType = (currentEventType + 1) % eventTypes[currentLanguage].length;
-                updateEventType();
-            }, 3000);
-        }
-
-        function updateEventType() {
-            document.getElementById('dynamicEventType').textContent = eventTypes[currentLanguage][currentEventType];
-        }
-
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-            document.getElementById('mobileMenu').classList.add('hidden');
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
-
-        function setupScrollEffects() {
-            window.addEventListener('scroll', () => {
-                const header = document.getElementById('header');
-                if (window.scrollY > 50) {
-                    header.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-amber-100');
-                    header.classList.remove('bg-transparent');
-                } else {
-                    header.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-amber-100');
-                    header.classList.add('bg-transparent');
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+            <!-- Call to Action -->
+            <div class="text-center mt-12 sm:mt-16">
+                <button onclick="scrollToSection(contact)" class="px-8 sm:px-12 py-4 sm:py-5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg sm:text-xl rounded-full hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105">
+                    <span id="portfolioCTA">Đặt lịch tư vấn miễn phí</span>
+                </button>
+            </div>
+        </div>
+    </section>
