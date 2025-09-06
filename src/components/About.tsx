@@ -1,138 +1,123 @@
-import { motion } from 'framer-motion';
-import { Users, Globe, Award, Heart } from 'lucide-react';
+"use client";
+
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/lib/translations';
+import { Users, Globe, Calendar, Heart } from 'lucide-react';
 
 export function About() {
+  const { language, isVietnamese } = useLanguage();
+  const t = translations[language];
+
   const stats = [
-    { icon: Users, value: '500+', label: 'Events Hosted' },
-    { icon: Globe, value: '2', label: 'Languages' },
-    { icon: Award, value: '10+', label: 'Years Experience' },
-    { icon: Heart, value: '100%', label: 'Client Satisfaction' }
+    {
+      icon: Users,
+      value: "500+",
+      label: t.about.stats.eventsHosted,
+      color: "text-amber-600"
+    },
+    {
+      icon: Globe,
+      value: "2",
+      label: t.about.stats.languages,
+      color: "text-orange-600"
+    },
+    {
+      icon: Calendar,
+      value: "10+",
+      label: t.about.stats.yearsExperience,
+      color: "text-red-600"
+    },
+    {
+      icon: Heart,
+      value: "100%",
+      label: t.about.stats.clientSatisfaction,
+      color: "text-pink-600"
+    }
+  ];
+
+  const specializations = [
+    {
+      icon: "🌐",
+      title: t.about.specializations.bilingual.title,
+      description: t.about.specializations.bilingual.description,
+      color: "from-amber-500 to-orange-500"
+    },
+    {
+      icon: "🏮",
+      title: t.about.specializations.cultural.title,
+      description: t.about.specializations.cultural.description,
+      color: "from-orange-500 to-red-500"
+    },
+    {
+      icon: "💝",
+      title: t.about.specializations.personal.title,
+      description: t.about.specializations.personal.description,
+      color: "from-red-500 to-pink-500"
+    }
   ];
 
   return (
-    <section id="about" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="about" className="py-20 bg-white/50 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            {t.about.title} <span className="gradient-warm">{t.about.subtitle}</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
           {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <div>
-              <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-                Meet <span className="font-bold">Tran Thinh</span>
-              </h2>
-              <div className="w-16 h-px bg-black mb-8"></div>
-            </div>
+          <div className="space-y-6">
+            <p className="text-lg text-gray-700 leading-relaxed">
+              {t.about.description1}
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              {t.about.description2}
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              {t.about.description3}
+            </p>
+          </div>
 
-            <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
-              <p>
-                With over a decade of experience as a Master of Ceremonies, I specialize in creating 
-                unforgettable moments for weddings, corporate events, and cultural celebrations across Vietnam.
-              </p>
-              
-              <p>
-                Born and raised in Hue, I understand the rich cultural heritage of Vietnam while being 
-                fluent in both Vietnamese and English. This unique combination allows me to serve 
-                international couples, corporate clients, and local families with equal expertise.
-              </p>
-              
-              <p>
-                My approach is personal, professional, and passionate. I believe every event tells a story, 
-                and my role is to ensure that story unfolds beautifully, creating memories that last a lifetime.
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-8 pt-8">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="text-center"
-                >
-                  <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                    <stat.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                  <div className="text-gray-600 text-sm">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="aspect-[4/5] bg-gray-100 rounded-2xl overflow-hidden">
-              <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-white text-2xl font-bold">TT</span>
-                  </div>
-                  <p className="text-gray-600 text-lg">Professional Headshot</p>
-                  <p className="text-gray-500 text-sm">Coming Soon</p>
+          {/* Stats */}
+          <div className="grid grid-cols-2 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-100">
+                <stat.icon className={`w-8 h-8 ${stat.color} mx-auto mb-4`} />
+                <div className={`text-3xl font-bold ${stat.color} mb-2`}>
+                  {stat.value}
+                </div>
+                <div className="text-sm text-gray-600 font-medium">
+                  {stat.label}
                 </div>
               </div>
-            </div>
-          </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Specializations */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <h3 className="text-3xl font-light text-center text-gray-900 mb-12">
-            What Makes Me Special
+        <div className="text-center mb-12">
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">
+            {t.about.specializations.title}
           </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-8">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl">🌐</span>
-              </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-4">Bilingual Excellence</h4>
-              <p className="text-gray-600">
-                Seamlessly switching between Vietnamese and English to ensure every guest feels included and understood.
-              </p>
-            </div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
+        </div>
 
-            <div className="text-center p-8">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl">🎭</span>
-              </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-4">Cultural Sensitivity</h4>
-              <p className="text-gray-600">
-                Deep understanding of Vietnamese traditions and international customs for authentic celebrations.
+        <div className="grid md:grid-cols-3 gap-8">
+          {specializations.map((spec, index) => (
+            <div key={index} className="text-center p-8 bg-white rounded-2xl shadow-lg border border-amber-100 hover:shadow-xl transition-all duration-300">
+              <div className="text-4xl mb-4">{spec.icon}</div>
+              <h4 className="text-xl font-bold text-gray-900 mb-4">
+                {spec.title}
+              </h4>
+              <p className="text-gray-600 leading-relaxed">
+                {spec.description}
               </p>
+              <div className={`w-full h-1 bg-gradient-to-r ${spec.color} rounded-full mt-6`}></div>
             </div>
-
-            <div className="text-center p-8">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl">✨</span>
-              </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-4">Personal Touch</h4>
-              <p className="text-gray-600">
-                Every event is unique. I take time to understand your vision and bring it to life with passion and precision.
-              </p>
-            </div>
-          </div>
-        </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

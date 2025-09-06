@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { testimonials } from '@/lib/data';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 export function Testimonials() {
+  const { language, isVietnamese } = useLanguage();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const nextTestimonial = () => {
@@ -16,155 +17,124 @@ export function Testimonials() {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`w-5 h-5 ${
+          i < rating ? 'text-amber-400 fill-current' : 'text-gray-300'
+        }`}
+      />
+    ));
+  };
+
   return (
-    <section id="testimonials" className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-            What Clients <span className="font-bold">Say</span>
+    <section id="testimonials" className="py-20 bg-gradient-to-br from-orange-50 to-red-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            {isVietnamese ? 'Đánh giá từ khách hàng' : 'Client Testimonials'}
           </h2>
-          <div className="w-16 h-px bg-black mx-auto mb-8"></div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Don't just take my word for it - hear from the couples and clients who have experienced my services
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            {isVietnamese 
+              ? 'Những lời khen ngợi từ các cặp đôi và gia đình đã tin tưởng tôi'
+              : 'Praise from couples and families who have trusted me'
+            }
           </p>
-        </motion.div>
-
-        {/* Testimonial Carousel */}
-        <div className="relative max-w-4xl mx-auto">
-          <motion.div
-            key={currentTestimonial}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-2xl p-8 md:p-12 shadow-sm"
-          >
-            <div className="text-center">
-              {/* Quote Icon */}
-              <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                <Quote className="w-6 h-6 text-white" />
-              </div>
-
-              {/* Testimonial Content */}
-              <blockquote className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8 italic">
-                "{testimonials[currentTestimonial].quote}"
-              </blockquote>
-
-              {/* Rating */}
-              <div className="flex justify-center mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`w-5 h-5 ${
-                      i < testimonials[currentTestimonial].rating
-                        ? 'text-yellow-400 fill-current'
-                        : 'text-gray-300'
-                    }`}
-                  />
-                ))}
-              </div>
-
-              {/* Client Info */}
-              <div className="text-center">
-                <h4 className="text-lg font-semibold text-gray-900 mb-1">
-                  {testimonials[currentTestimonial].name}
-                </h4>
-                <p className="text-gray-600 font-medium mb-1">
-                  {testimonials[currentTestimonial].event}
-                </p>
-                <p className="text-gray-500 text-sm">
-                  {testimonials[currentTestimonial].date}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevTestimonial}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-gray-900 hover:scale-110 transition-all duration-300"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          
-          <button
-            onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-gray-900 hover:scale-110 transition-all duration-300"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
+          <div className="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full mt-6"></div>
         </div>
 
-        {/* Dots Indicator */}
-        <div className="flex justify-center mt-8 space-x-2">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentTestimonial(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentTestimonial
-                  ? 'bg-black scale-125'
-                  : 'bg-gray-300 hover:bg-gray-400'
-              }`}
-            />
-          ))}
+        {/* Featured Testimonial */}
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-amber-100 mb-16 relative">
+          <Quote className="absolute top-8 left-8 w-12 h-12 text-amber-200" />
+          
+          <div className="flex flex-col lg:flex-row gap-8 items-center">
+            <div className="flex-1">
+              <div className="flex items-center gap-1 mb-4">
+                {renderStars(testimonials[currentTestimonial].rating)}
+              </div>
+              <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6 italic">
+                "{isVietnamese 
+                  ? testimonials[currentTestimonial].quoteVi 
+                  : testimonials[currentTestimonial].quote
+                }"
+              </blockquote>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  {(isVietnamese 
+                    ? testimonials[currentTestimonial].nameVi 
+                    : testimonials[currentTestimonial].name
+                  ).charAt(0)}
+                </div>
+                <div>
+                  <div className="font-bold text-gray-900">
+                    {isVietnamese 
+                      ? testimonials[currentTestimonial].nameVi 
+                      : testimonials[currentTestimonial].name
+                    }
+                  </div>
+                  <div className="text-amber-600 font-medium">
+                    {isVietnamese 
+                      ? testimonials[currentTestimonial].eventVi 
+                      : testimonials[currentTestimonial].event
+                    }
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    {isVietnamese 
+                      ? testimonials[currentTestimonial].dateVi 
+                      : testimonials[currentTestimonial].date
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex gap-2">
+              <button
+                onClick={prevTestimonial}
+                className="p-3 bg-amber-100 hover:bg-amber-200 rounded-full transition-colors duration-200"
+              >
+                <ChevronLeft className="w-5 h-5 text-amber-600" />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="p-3 bg-amber-100 hover:bg-amber-200 rounded-full transition-colors duration-200"
+              >
+                <ChevronRight className="w-5 h-5 text-amber-600" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* All Testimonials Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <h3 className="text-3xl font-light text-center text-gray-900 mb-12">
-            More Client Reviews
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
-              >
-                <div className="flex justify-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < testimonial.rating
-                          ? 'text-yellow-400 fill-current'
-                          : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial) => (
+            <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-lg border border-amber-100 hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-1 mb-4">
+                {renderStars(testimonial.rating)}
+              </div>
+              <blockquote className="text-gray-700 leading-relaxed mb-4 italic">
+                "{isVietnamese ? testimonial.quoteVi : testimonial.quote}"
+              </blockquote>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full flex items-center justify-center text-white font-bold">
+                  {(isVietnamese ? testimonial.nameVi : testimonial.name).charAt(0)}
                 </div>
-                
-                <blockquote className="text-gray-700 mb-4 italic">
-                  "{testimonial.quote.length > 120 
-                    ? testimonial.quote.substring(0, 120) + '...' 
-                    : testimonial.quote}"
-                </blockquote>
-                
-                <div className="text-center">
-                  <h4 className="font-semibold text-gray-900 mb-1">{testimonial.name}</h4>
-                  <p className="text-gray-600 text-sm font-medium">{testimonial.event}</p>
+                <div>
+                  <div className="font-bold text-gray-900 text-sm">
+                    {isVietnamese ? testimonial.nameVi : testimonial.name}
+                  </div>
+                  <div className="text-amber-600 font-medium text-sm">
+                    {isVietnamese ? testimonial.eventVi : testimonial.event}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    {isVietnamese ? testimonial.dateVi : testimonial.date}
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
