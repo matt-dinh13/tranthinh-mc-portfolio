@@ -31,7 +31,7 @@
     </script>
     <style>
         body {
-            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fecaca 100%);
+            background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #4b5563 100%);
             font-family: 'Inter', sans-serif;
         }
         .gradient-warm {
@@ -62,16 +62,16 @@
                 min-height: 100vh;
             }
         }
-        /* Improved Hero Overlay - Warm gradient instead of dark */
+        /* Original dark hero overlay */
         .hero-overlay {
-            background: linear-gradient(135deg, rgba(245,158,11,0.8) 0%, rgba(234,88,12,0.6) 50%, rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%);
         }
         .spotlight {
             background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 30%, transparent 70%);
         }
-        /* Smooth section transitions */
+        /* Smooth transition from dark hero to dark content */
         .section-transition {
-            background: linear-gradient(180deg, transparent 0%, rgba(254,243,199,0.3) 50%, rgba(254,243,199,0.8) 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(31,41,55,0.1) 30%, rgba(31,41,55,0.5) 70%, rgba(31,41,55,0.9) 100%);
         }
         /* Testimonial card hover effects */
         .testimonial-card {
@@ -79,7 +79,7 @@
         }
         .testimonial-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
     </style>
 </head>
@@ -151,11 +151,11 @@
         <div class="absolute bottom-0 left-0 right-0 h-20 section-transition"></div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-amber-50 to-orange-50">
+    <!-- About Section - Dark Charcoal -->
+    <section id="about" class="py-12 sm:py-16 lg:py-20 bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
                     <span id="aboutTitle">Gặp gỡ</span> <span class="gradient-warm" id="aboutSubtitle">Trần Thịnh</span>
                 </h2>
                 <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
@@ -181,13 +181,13 @@
 
                 <!-- Content -->
                 <div class="order-1 lg:order-2 space-y-4 sm:space-y-6">
-                    <p id="aboutDesc1" class="text-base sm:text-lg text-gray-700 leading-relaxed">
+                    <p id="aboutDesc1" class="text-base sm:text-lg text-gray-300 leading-relaxed">
                         Với hơn một thập kỷ kinh nghiệm làm Người dẫn chương trình, tôi chuyên tạo ra những khoảnh khắc khó quên cho đám cưới, sự kiện doanh nghiệp và lễ hội văn hóa trên khắp Việt Nam.
                     </p>
-                    <p id="aboutDesc2" class="text-base sm:text-lg text-gray-700 leading-relaxed">
+                    <p id="aboutDesc2" class="text-base sm:text-lg text-gray-300 leading-relaxed">
                         Sinh ra và lớn lên tại Huế, tôi hiểu rõ di sản văn hóa phong phú của Việt Nam đồng thời thông thạo cả tiếng Việt và tiếng Anh. Sự kết hợp độc đáo này cho phép tôi phục vụ các cặp đôi quốc tế, khách hàng doanh nghiệp và gia đình địa phương với chuyên môn ngang nhau.
                     </p>
-                    <p id="aboutDesc3" class="text-base sm:text-lg text-gray-700 leading-relaxed">
+                    <p id="aboutDesc3" class="text-base sm:text-lg text-gray-300 leading-relaxed">
                         Phương pháp của tôi là cá nhân, chuyên nghiệp và đam mê. Tôi tin rằng mỗi sự kiện đều kể một câu chuyện, và vai trò của tôi là đảm bảo câu chuyện đó được mở ra một cách đẹp đẽ, tạo ra những kỷ niệm tồn tại suốt đời.
                     </p>
                 </div>
@@ -195,15 +195,15 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-orange-50 to-red-50">
+    <!-- Portfolio Section - Darker Charcoal -->
+    <section id="portfolio" class="py-12 sm:py-16 lg:py-20 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
                     <span id="portfolioTitle">Portfolio</span> <span class="gradient-warm" id="portfolioSubtitle">Sự kiện nổi bật</span>
                 </h2>
                 <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
-                <p class="text-lg text-gray-600 mt-6 max-w-3xl mx-auto" id="portfolioDescription">
+                <p class="text-lg text-gray-300 mt-6 max-w-3xl mx-auto" id="portfolioDescription">
                     Khám phá những sự kiện đáng nhớ mà tôi đã dẫn dắt, từ đám cưới sang trọng đến sự kiện doanh nghiệp quy mô lớn.
                 </p>
             </div>
@@ -234,22 +234,22 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-red-50 to-pink-50">
+    <!-- Testimonials Section - Navy Blue -->
+    <section id="testimonials" class="py-12 sm:py-16 lg:py-20 bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
                     <span id="testimonialsTitle">Đánh giá</span> <span class="gradient-warm" id="testimonialsSubtitle">Từ khách hàng</span>
                 </h2>
                 <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
-                <p class="text-lg text-gray-600 mt-6 max-w-3xl mx-auto" id="testimonialsDescription">
+                <p class="text-lg text-gray-300 mt-6 max-w-3xl mx-auto" id="testimonialsDescription">
                     Những lời nhận xét chân thành từ các cặp đôi và khách hàng đã tin tưởng tôi dẫn dắt sự kiện quan trọng của họ.
                 </p>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <!-- Testimonial 1 -->
-                <div class="testimonial-card bg-white rounded-xl sm:rounded-2xl shadow-lg p-6 sm:p-8">
+                <div class="testimonial-card bg-gray-800 rounded-xl sm:rounded-2xl shadow-lg p-6 sm:p-8">
                     <div class="flex items-center mb-4">
                         <div class="flex text-amber-400">
                             <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -259,7 +259,7 @@
                             <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                         </div>
                     </div>
-                    <p class="text-gray-700 text-sm sm:text-base leading-relaxed mb-4 italic" id="testimonial1Text">
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-4 italic" id="testimonial1Text">
                         "Trần Thịnh đã làm cho đám cưới của chúng tôi trở nên hoàn hảo. Sự chuyên nghiệp và khả năng song ngữ của anh ấy đã giúp tất cả khách mời cảm thấy được chào đón và hiểu rõ mọi thứ."
                     </p>
                     <div class="flex items-center">
@@ -267,14 +267,14 @@
                             M
                         </div>
                         <div class="ml-3">
-                            <div class="font-semibold text-gray-900 text-sm" id="testimonial1Name">Minh & Linh</div>
-                            <div class="text-gray-500 text-xs" id="testimonial1Event">Đám cưới tại Huế</div>
+                            <div class="font-semibold text-white text-sm" id="testimonial1Name">Minh & Linh</div>
+                            <div class="text-gray-400 text-xs" id="testimonial1Event">Đám cưới tại Huế</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Testimonial 2 -->
-                <div class="testimonial-card bg-white rounded-xl sm:rounded-2xl shadow-lg p-6 sm:p-8">
+                <div class="testimonial-card bg-gray-800 rounded-xl sm:rounded-2xl shadow-lg p-6 sm:p-8">
                     <div class="flex items-center mb-4">
                         <div class="flex text-amber-400">
                             <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -284,7 +284,7 @@
                             <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                         </div>
                     </div>
-                    <p class="text-gray-700 text-sm sm:text-base leading-relaxed mb-4 italic" id="testimonial2Text">
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-4 italic" id="testimonial2Text">
                         "Thinh's bilingual MC skills were exactly what we needed for our international corporate event. He seamlessly switched between Vietnamese and English, keeping everyone engaged throughout the evening."
                     </p>
                     <div class="flex items-center">
@@ -292,14 +292,14 @@
                             J
                         </div>
                         <div class="ml-3">
-                            <div class="font-semibold text-gray-900 text-sm" id="testimonial2Name">James & Sarah</div>
-                            <div class="text-gray-500 text-xs" id="testimonial2Event">Sự kiện doanh nghiệp</div>
+                            <div class="font-semibold text-white text-sm" id="testimonial2Name">James & Sarah</div>
+                            <div class="text-gray-400 text-xs" id="testimonial2Event">Sự kiện doanh nghiệp</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Testimonial 3 -->
-                <div class="testimonial-card bg-white rounded-xl sm:rounded-2xl shadow-lg p-6 sm:p-8 sm:col-span-2 lg:col-span-1">
+                <div class="testimonial-card bg-gray-800 rounded-xl sm:rounded-2xl shadow-lg p-6 sm:p-8 sm:col-span-2 lg:col-span-1">
                     <div class="flex items-center mb-4">
                         <div class="flex text-amber-400">
                             <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -309,7 +309,7 @@
                             <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                         </div>
                     </div>
-                    <p class="text-gray-700 text-sm sm:text-base leading-relaxed mb-4 italic" id="testimonial3Text">
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-4 italic" id="testimonial3Text">
                         "Anh Thịnh không chỉ là một MC chuyên nghiệp mà còn là một người hiểu rõ văn hóa Việt Nam. Lễ hội văn hóa của chúng tôi đã trở nên ý nghĩa hơn nhờ sự dẫn dắt tinh tế của anh ấy."
                     </p>
                     <div class="flex items-center">
@@ -317,8 +317,8 @@
                             T
                         </div>
                         <div class="ml-3">
-                            <div class="font-semibold text-gray-900 text-sm" id="testimonial3Name">Thảo & Nam</div>
-                            <div class="text-gray-500 text-xs" id="testimonial3Event">Lễ hội văn hóa</div>
+                            <div class="font-semibold text-white text-sm" id="testimonial3Name">Thảo & Nam</div>
+                            <div class="text-gray-400 text-xs" id="testimonial3Event">Lễ hội văn hóa</div>
                         </div>
                     </div>
                 </div>
@@ -326,26 +326,26 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-pink-50 to-amber-50">
+    <!-- Contact Section - Back to Charcoal -->
+    <section id="contact" class="py-12 sm:py-16 lg:py-20 bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
                 <span id="contactTitle">Liên hệ</span> <span class="gradient-warm" id="contactSubtitle">Trần Thịnh</span>
             </h2>
             <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full mb-12"></div>
             
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
-                <a href="tel:+84123456789" class="flex items-center justify-center gap-3 p-6 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl hover:shadow-lg transition-all duration-300">
-                    <i data-lucide="phone" class="w-6 h-6 text-amber-600"></i>
-                    <span class="font-medium text-gray-900">+84 123 456 789</span>
+                <a href="tel:+84123456789" class="flex items-center justify-center gap-3 p-6 bg-gray-700 rounded-xl hover:bg-gray-600 transition-all duration-300">
+                    <i data-lucide="phone" class="w-6 h-6 text-amber-400"></i>
+                    <span class="font-medium text-white">+84 123 456 789</span>
                 </a>
-                <a href="mailto:hello@tranthinh.com" class="flex items-center justify-center gap-3 p-6 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl hover:shadow-lg transition-all duration-300">
-                    <i data-lucide="mail" class="w-6 h-6 text-amber-600"></i>
-                    <span class="font-medium text-gray-900">hello@tranthinh.com</span>
+                <a href="mailto:hello@tranthinh.com" class="flex items-center justify-center gap-3 p-6 bg-gray-700 rounded-xl hover:bg-gray-600 transition-all duration-300">
+                    <i data-lucide="mail" class="w-6 h-6 text-amber-400"></i>
+                    <span class="font-medium text-white">hello@tranthinh.com</span>
                 </a>
-                <div class="flex items-center justify-center gap-3 p-6 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl">
-                    <i data-lucide="map-pin" class="w-6 h-6 text-amber-600"></i>
-                    <span class="font-medium text-gray-900">Huế, Việt Nam</span>
+                <div class="flex items-center justify-center gap-3 p-6 bg-gray-700 rounded-xl">
+                    <i data-lucide="map-pin" class="w-6 h-6 text-amber-400"></i>
+                    <span class="font-medium text-white">Huế, Việt Nam</span>
                 </div>
             </div>
         </div>
